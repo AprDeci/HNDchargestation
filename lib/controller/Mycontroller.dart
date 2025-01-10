@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:chargestation/request/HttpClient.dart';
 import 'package:get/get.dart';
 
+import '../request/HttpClient.dart';
+
 
 class Mycontroller extends GetxController{
 
@@ -61,7 +63,8 @@ Future<void> getAllData() async{
     }
     print(Allstates);
 }
-  final ids = ["4GR00007971","4GR00007972","4GR00007973","4GR00007974","4GR00007975","4GR00007976","4GR00007977","4GR00007978","4GR00007979","4GR00007980","4GR00007981"];
+  final ids = ["4GR00007971","4GR00008013","4GR00007975","4GR00007977","4GR00008014","4GR00007974","4GR00007996","4GR00007992","4GR00008016","4GR00007973","4GR00007978","4GR00007994"];
+
 
   final states = <String,dynamic>{}.obs;
 

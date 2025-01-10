@@ -5,7 +5,22 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def appName = "河农带电桩" // 文件名
+                def cpu = output.getFilter(com.android.build.OutputFile.ABI)!=null
+                        ? output.getFilter(com.android.build.OutputFile.ABI)
+                        : "all" // 默认值;
+                outputFileName = "${appName}_${defaultConfig.versionName}_${variant.flavorName}_${variant.buildType.name}-${cpu}.apk"
+            }
+        }
+
+
     namespace = "top.aprdec.chargestation"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -30,11 +45,17 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }

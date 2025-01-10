@@ -1,16 +1,13 @@
-import 'dart:convert';
-
-import 'package:chargestation/controller/Mycontroller.dart';
-import 'package:flutter/cupertino.dart';
+ import 'package:chargestation/controller/Mycontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class stationcard extends StatelessWidget {
   final Map state;
   final String name;
+  final Mycontroller mycontroller = Get.find();
   stationcard(this.state,this.name);
 
-  Mycontroller mycontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
