@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,9 +42,24 @@ class SettingsPage extends StatelessWidget {
               _launchUrl();
             },
           ),
+          ListTile(
+            leading: Icon(Icons.accessibility_new_rounded),
+            title: Text('感谢名单'),
+            onTap: () {
+              SmartDialog.show(
+                  builder:(context){
+                return Card(
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      child: Text("软件21-3班李继鹏,感谢他提供兰亭苑设备ID名单"),
+                    )
+                );});
+            },
+          ),
         ],
       ),
     );
   }
 }
+
 
