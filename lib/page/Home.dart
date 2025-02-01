@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(context) {
-    Mycontroller controller = Get.put(Mycontroller());
+    HomeController controller = Get.put(HomeController());
     List tabs = ["兰亭", "食堂", "XX"];
     return DefaultTabController(
         length: tabs.length,
@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
             return KeepAliveWrapper(
               child: Obx(() {
                 if (controller.Allstates.isEmpty) {
+                  // 加载界面
                   return Center(child: CircularProgressIndicator()); // 显示加载指示器
                 } else {
                   return RefreshIndicator(

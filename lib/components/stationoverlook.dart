@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class stationcard extends StatelessWidget {
   final Map state;
   final String name;
-  final Mycontroller mycontroller = Get.find();
+  final HomeController mycontroller = Get.find();
   stationcard(this.state,this.name);
 
 
