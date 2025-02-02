@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../components/KeepAliveWrapper.dart';
 import '../components/stationoverlook.dart';
 import '../controller/Mycontroller.dart';
@@ -21,26 +22,43 @@ class Home extends StatelessWidget {
           )),
           body: TabBarView(
               children: tabs.map((e) {
-            return KeepAliveWrapper(
-              child: Obx(() {
-                if (controller.Allstates.isEmpty) {
-                  // 加载界面
-                  return Center(child: CircularProgressIndicator()); // 显示加载指示器
-                } else {
-                  return RefreshIndicator(
-                      onRefresh: () async {
-                        controller.getAllData();
-                      },
-                      child: ListView.builder(
-                        itemCount: controller.Allstates.length,
+            return KeepAliveWrapper(child: Obx(() {
+              if (controller.Allstates.isEmpty) {
+              //if(true){
+                // 加载界面
+                return Skeletonizer(
+                    child: ListView.builder(
+                        itemCount: 10,
                         itemBuilder: (context, index) {
-                          final state = controller.Allstates[index];
-                          return stationcard(state, "兰亭苑${index + 1}号桩");
-                        },
-                      ));
-                }
-              }),
-            );
+                          return Card(
+                              child: ListTile(
+                              title: const Text('The title goes here'),
+                          subtitle: Row(
+                              children: List.generate(10, (index) {
+                                return Container(
+                                  margin: EdgeInsets.all(4),
+                                  width: 25,
+                                  height: 25,
+                                  color: Colors.grey,
+                                );
+                              }),
+                          )
+                          ));
+                        })); // 显示加载指示器
+              } else {
+                return RefreshIndicator(
+                    onRefresh: () async {
+                      controller.getAllData();
+                    },
+                    child: ListView.builder(
+                      itemCount: controller.Allstates.length,
+                      itemBuilder: (context, index) {
+                        final state = controller.Allstates[index];
+                        return stationcard(state, "兰亭苑${index + 1}号桩");
+                      },
+                    ));
+              }
+            }));
           }).toList()),
         ));
   }

@@ -39,24 +39,46 @@ class HomeController extends GetxController {
     states.value = json.decode(response);
   }
 
+  // Future<void> getAllData() async {
+  //   Allstates.clear();
+  //   for (String id in ids) {
+  //     try {
+  //       var response = await httpclient.getStationInfo({
+  //         "code": id,
+  //         "parentCode": null,
+  //         "timestamp":
+  //             (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
+  //       }, headers, "lanting");
+  //       Allstates.add(response);
+  //     } catch (e) {
+  //       print("Getallstates-Error-${e}");
+  //     }
+  //   }
+  //   print(Allstates);
+  // }
   Future<void> getAllData() async {
     Allstates.clear();
-    for (String id in ids) {
+    // 使用 map 创建一个 Future 列表，并用 Future.wait 并发执行它们
+    List<Future> futures = ids.map((id) async {
       try {
         var response = await httpclient.getStationInfo({
           "code": id,
           "parentCode": null,
-          "timestamp":
-              (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
+          "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
         }, headers, "lanting");
         Allstates.add(response);
       } catch (e) {
         print("Getallstates-Error-${e}");
       }
-    }
+    }).toList();
+
+    // 等待所有 Future 完成
+    await Future.wait(futures);
+
     print(Allstates);
   }
 
+  // 12
   final ids = [
     "4GR00007971",
     "4GR00008013",
@@ -72,11 +94,26 @@ class HomeController extends GetxController {
     "4GR00007994"
   ];
 
+  final ids_lt = {
+    '1':"4GR00007971",
+    '2':"4GR00008013",
+    '3':"4GR00007975",
+    '4':"4GR00007977",
+    '5':"4GR00008014",
+    '6':"4GR00007974",
+    '7':"4GR00007996",
+    '8':"4GR00007992",
+    '9':"4GR00008016",
+    '10':"4GR00007973",
+    '11':"4GR00007978",
+    '12':"4GR00007994"
+  };
+
   final states = <String, dynamic>{}.obs;
 
   final Allstates = <Map<String, dynamic>>[].obs;
 
   final lanting_states = <Map<String, dynamic>>{}.obs;
 
-
+  final hasgetData_lt = false.obs;
 }
