@@ -18,13 +18,12 @@ class Home extends StatelessWidget {
           appBar: AppBar(
               title: TabBar(
             controller: tabcontroller,
-            tabs: tabs.map((e) => Tab(text: e)).toList(),
+            tabs: tabs.map((e) => Tab(text: e,)).toList(),
           )),
           body: TabBarView(
               children: tabs.map((e) {
             return KeepAliveWrapper(child: Obx(() {
-              if (controller.Allstates.isEmpty) {
-              //if(true){
+              if (!controller.hasloaded_lt.value) {
                 // 加载界面
                 return Skeletonizer(
                     child: ListView.builder(
@@ -51,10 +50,10 @@ class Home extends StatelessWidget {
                       controller.getAllData();
                     },
                     child: ListView.builder(
-                      itemCount: controller.Allstates.length,
+                      itemCount: controller.allstates_lt.length,
                       itemBuilder: (context, index) {
-                        final state = controller.Allstates[index];
-                        return stationcard(state, "兰亭苑${index + 1}号桩");
+                        final state = controller.allstates_lt[index+1];
+                        return stationcard(state!, "兰亭苑${index + 1}号桩");
                       },
                     ));
               }
