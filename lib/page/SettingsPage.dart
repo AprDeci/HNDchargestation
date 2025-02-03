@@ -73,10 +73,6 @@ class SettingsPage extends StatelessWidget {
                  content: Text('谢谢软件21-3班李继鹏和我一起扫码记录ID'),
                  actions: [
                    TextButton(
-                     onPressed: (() => Get.back(result: false)),
-                     child: Text("取消"),
-                   ),
-                   TextButton(
                      onPressed: (() => Get.back(result: true)),
                      child: Text("确定"),
                    ),
