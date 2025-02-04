@@ -1,4 +1,4 @@
- import 'package:chargestation/controller/Mycontroller.dart';
+ import 'package:chargestation/controller/Homecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
