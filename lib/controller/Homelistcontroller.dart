@@ -63,6 +63,7 @@ class HomeListController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     print("----------${area.name}初始化");
+    getAllstatus();
     super.onInit();
   }
 

@@ -22,8 +22,13 @@ class HomeListView extends StatelessWidget{
 
     return KeepAliveWrapper(child: Obx(() {
       if (!controller.hasloaded.value) {
+      //if(true){
         // 加载界面
-        return Skeletonizer(
+        return RefreshIndicator(
+            onRefresh: ()async{
+              controller.getAllstatus();
+            },child:
+          Skeletonizer(
             child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
@@ -40,7 +45,7 @@ class HomeListView extends StatelessWidget{
                               );
                             }),
                           )));
-                })); // 显示加载指示器
+                }))); // 显示加载指示器
       } else {
         return RefreshIndicator(
             onRefresh: () async {
@@ -57,8 +62,6 @@ class HomeListView extends StatelessWidget{
     }));
 
 
-
-    throw UnimplementedError();
   }
 
 }
