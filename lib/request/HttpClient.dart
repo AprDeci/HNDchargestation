@@ -44,9 +44,8 @@ class Httpclient {
 
 
 
-  getStationInfo(Map data, Map<String,String> headers,String zone) async{
+  getStationInfo(Map data, Map<String,String> headers) async{
     try {
-      if(zone == "lanting") {
         Response response = await _dio.post(
             '/equi/afterProtocol/getLineInfo',
             data: data,
@@ -57,21 +56,6 @@ class Httpclient {
         } else {
           return "lose";
         }
-      }
-      else if(zone == "xxx"){
-        if(zone == "lanting") {
-          Response response = await _dio.post(
-              '/equi/afterProtocol/getLineInfo',
-              data: data,
-              options: Options(
-                  headers: headers, followRedirects: false));
-          if (response.statusCode == 200) {
-            return response.data;
-          } else {
-            return "lose";
-          }
-      }
-    }
     }catch(e){
       print("异常:${e}");
     }

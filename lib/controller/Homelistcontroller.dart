@@ -1,3 +1,6 @@
+
+import 'dart:math';
+
 import 'package:chargestation/app/areas.dart';
 import 'package:get/get.dart';
 
@@ -32,31 +35,74 @@ class HomeListController extends GetxController{
 
   HomeListController(this.area);
 
+  // Future<void> getAllstatus() async {
+  //
+  //   allstates.clear();
+  //
+  //   hasloaded.value = false;
+  //
+  //   List<Future> futures = area.ids.entries.map((id) async {
+  //     try {
+  //       var response = await httpclient.getStationInfo({
+  //         "code": id.value,
+  //         "parentCode": null,
+  //         "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
+  //       }, headers, "lanting");
+  //       allstates[id.key] = response;
+  //     } catch (e) {
+  //       print("Getallstates-Error-${e}");
+  //     }
+  //   }).toList();
+  //
+  //   await Future.wait(futures);
+  //
+  //   hasloaded.value=true;
+  //
+  //   print("加载完毕:--------------------------${allstates.toString()}");
+  //
+  // }
+
   Future<void> getAllstatus() async {
-
     allstates.clear();
-
     hasloaded.value = false;
 
-    List<Future> futures = area.ids.entries.map((id) async {
-      try {
-        var response = await httpclient.getStationInfo({
-          "code": id.value,
-          "parentCode": null,
-          "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
-        }, headers, "lanting");
-        allstates[id.key] = response;
-      } catch (e) {
-        print("Getallstates-Error-${e}");
+    final random = Random();
+    const maxRetries = 3;
+
+    List<Future<void>> futures = area.ids.entries.map((entry) async {
+      final idKey = entry.key;
+      final idValue = entry.value;
+      int attempt = 0;
+      bool success = false;
+
+      while (attempt < maxRetries && !success) {
+        attempt++;
+        try {
+          final response = await httpclient.getStationInfo({
+            "code": idValue,
+            "parentCode": null,
+            "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
+          }, headers).timeout(Duration(seconds: 5));
+
+          allstates[idKey] = response;
+          success = true;
+        } catch (e) {
+          if (attempt == maxRetries) {
+            print("⚠️ 关键错误: ID $idKey 最终失败 - ${e.toString()}");
+            // 可以在这里记录最终失败状态
+          } else {
+            var backoffTime = (pow(2, attempt) * 1000 + random.nextInt(500)).toInt();
+            await Future.delayed(Duration(milliseconds: backoffTime));
+          }
+        }
       }
     }).toList();
 
+    // 使用等待所有请求完成（无论成功失败）
     await Future.wait(futures);
 
-    hasloaded.value=true;
-
-    print("加载完毕:--------------------------${allstates.toString()}");
-
+    hasloaded.value = true;
+    print("✅ 加载完成，成功获取 ${allstates.length}/${area.ids.length} 个状态");
   }
 
   @override

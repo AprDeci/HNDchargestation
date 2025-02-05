@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
               width: 56,
               height: 56,),
             title: Text('河农大充电桩查看器',style: TextStyle(height: 1.0,fontSize: 16)),
-            subtitle: Text('求求学弟学妹了给个star吧',style: TextStyle(height: 1.0,fontSize: 10),),
+            subtitle: Text('赶快去看《败犬女主太多了!》',style: TextStyle(height: 1.0,fontSize: 10),),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: (){
               Get.dialog(AboutDialog(
@@ -37,9 +37,11 @@ class SettingsPage extends StatelessWidget {
                   height: 48,
                 ),
                 applicationName: "河农大充电桩查看器",
-                applicationVersion: "简简单单看直播",
+                applicationVersion: "赶快去看《败犬女主太多了!》",
                 applicationLegalese: "Ver 1.1",
               ));
+
+
             },
           ),
           Divider(
