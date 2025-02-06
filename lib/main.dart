@@ -18,11 +18,11 @@ void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   final dir = await getApplicationDocumentsDirectory();
-  await Hive.initFlutter(dir.path);
+  await Hive.initFlutter();
 
   Hive.registerAdapter(AreaAdapter());
 
-  Get.put(dbservice()).init();
+  await Get.put(dbservice()).init();
   Get.put(settingpagecontroller());
 
   runApp(GetMaterialApp(
@@ -32,13 +32,13 @@ void main() async{
         GetPage(name: '/home', page: ()=>Home()),
         GetPage(name: '/setting', page: ()=>SettingsPage())
       ],
-    locale: const Locale("zh", "CN"),
-    localizationsDelegates: const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    supportedLocales: const [Locale("zh", "CN")],
+      locale: const Locale("zh", "CN"),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale("zh", "CN")],
       navigatorObservers: [FlutterSmartDialog.observer],
       builder: FlutterSmartDialog.init(),
   ));

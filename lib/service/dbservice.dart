@@ -7,6 +7,8 @@ class dbservice extends GetxService{
 
   static const String LareaList = "areaList";
 
+  static const String Lfirstuse = "firstuse";
+
   late Box settingBox;
 
   Future init() async{
@@ -25,6 +27,7 @@ class dbservice extends GetxService{
   }
   Future setValue<T>(dynamic key,T value) async {
     print("set settingbox: $key : $value");
+    print(settingBox.get(key));
     return await settingBox.put(key,value);
   }
   Future removeValue(dynamic key) async {

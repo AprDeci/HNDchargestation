@@ -62,7 +62,7 @@ class SettingsPage extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(SimpleIcons.notion,color: SimpleIconColors.notion),
+            leading: Icon(SimpleIcons.wordpress,color: SimpleIconColors.github),
             title: Text('学长博客'),
             onTap: () {
               _launchUrl(url_blog);

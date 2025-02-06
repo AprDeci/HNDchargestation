@@ -10,6 +10,7 @@ class navigatorpage extends StatelessWidget{
   // 导航控制器
   navigatorController navigatorcontroller = Get.put(navigatorController());
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
