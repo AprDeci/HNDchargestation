@@ -1,16 +1,6 @@
-# chargestation
+# HNDchargestation
 
-查看充电桩情况的app
+河南农业大学龙子湖校区充电桩一键查看APP
 
-## Getting Started
+![HNDchargestation/key at master · AprDeci/HNDchargestation](https://github.com/AprDeci/HNDchargestation/tree/master/mdassets/image1.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
