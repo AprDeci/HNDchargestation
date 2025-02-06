@@ -88,6 +88,28 @@ class SettingsPage extends StatelessWidget {
             },
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
+          // 下载页面
+          ListTile(
+            leading: Icon(Icons.download_rounded),
+            title: Text('下载地址'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              Get.dialog(
+                AlertDialog(
+                  content: Text("下载地址"),
+                  actions: [
+                    TextButton(
+                      child: Text("云盘"),
+                      onPressed: () {}
+                    ),
+                    TextButton(
+                        onPressed: (){},
+                        child: Text("Github_release"))
+                  ]
+                )
+              );
+    }
+          ),
           Divider(
             indent: 12,
             endIndent: 12,
