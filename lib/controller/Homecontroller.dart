@@ -10,14 +10,14 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   late TabController tabcontroller;
 
   HomeController(){
-    tabcontroller = TabController(length: Areas.areaList.length, vsync: this);
+    tabcontroller = TabController(length: Areas.arealist.length, vsync: this);
   }
 
   @override
   void onInit() {
 
     // 为不同区域注入controller
-    for(var area in Areas.areaList){
+    for(var area in Areas.arealist){
       Get.lazyPut(()=>HomeListController(area),tag: area.name);
     }
 

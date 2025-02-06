@@ -1,8 +1,12 @@
+import 'package:chargestation/app/utils/dbutil.dart';
+import 'package:chargestation/controller/Settingpagecontroller.dart';
+import 'package:hive/hive.dart';
+part 'areas.g.dart';
 class Areas {
-  static final List<Area> areaList = [
-    Area(
-      'lanting',
-      '兰亭',
+  static final Map<String, Area> areaMap = {
+    "lanting": Area(
+      MM: 'lanting',
+      name: '兰亭',
       ids: {
         1: "4GR00007971",
         2: "4GR00008013",
@@ -18,19 +22,47 @@ class Areas {
         12: "4GR00007994"
       },
     ),
-    Area('shitang', '食堂'),
-    Area('XX', 'XX'),
-  ];
+    "shitang": Area(MM: 'shitang', name: '食堂'),
+    "XX": Area(MM: 'XX', name: 'XX'),
+  };
 
-  static List<String> arealist_name() {
-    return areaList.map((e) => e.name).toList();
+  static List<Area> get arealist {
+    return settingpagecontroller.instance.arealist
+        .map((e) => areaMap[e]!)
+        .toList();
+  }
+
+  static List<String> get arealist_name {
+    return settingpagecontroller.instance.arealist
+        .map((e) => areaMap[e]!.name)
+        .toList();
   }
 }
 
+@HiveType(typeId: 1)
 class Area {
+
+  @HiveField(0)
   String MM; //英文简写
+  @HiveField(1)
   String name;
+  @HiveField(2)
   Map ids;
 
-  Area(this.MM, this.name, {this.ids = const {}});
+  Area({required this.MM, required this.name, this.ids = const {}});
+
+  factory Area.fromJson(Map<String, dynamic> json) => Area(
+      MM: '${json['MM']}', name: '${json['name']}', ids: json['ids']
+  );
+
+  Map<String,dynamic> toJson(){
+    return {
+      'MM': MM,
+      'name': name,
+      'ids': ids,
+    };
+  }
+
+
+
 }

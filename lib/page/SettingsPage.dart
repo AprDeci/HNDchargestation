@@ -1,13 +1,17 @@
+import 'package:chargestation/controller/Settingpagecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:simple_icons/simple_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../app/areas.dart';
+
 class SettingsPage extends StatelessWidget {
 
   final Uri url_blog = Uri.parse('https://www.aprdec.top');
   final Uri url_github = Uri.parse('https://github.com/aprdeci');
+  final settingpagecontroller controller = Get.find();
 
   Future<void> _launchUrl(url) async {
     if (!await launchUrl(url)) {
@@ -84,10 +88,35 @@ class SettingsPage extends StatelessWidget {
             },
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
+          Divider(
+            indent: 12,
+            endIndent: 12,
+            color: Colors.grey.withOpacity(.1),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: Text('区域排序(长按拖动排序,重启后生效)',style: Get.textTheme.titleSmall,),
+          ),
+          ConstrainedBox(constraints: BoxConstraints(maxHeight: 60.0*Areas.arealist.length),child:
+
+          Card.filled(color: Colors.white54.withOpacity(.7),
+              shadowColor: Colors.black.withOpacity(1),
+              child:Obx(()=>
+          ReorderableListView(
+              physics: const NeverScrollableScrollPhysics(),
+            onReorder: controller.updateAreaList,
+            children: Areas.arealist.map((e) => ListTile(
+                title: Text(e.name,style: TextStyle(fontSize: 14),),
+                trailing: Icon(Icons.drag_handle,color: Colors.grey,),
+                key: Key(e.name),
+            )).toList()
+          ))
+          ))
         ],
       ),
     );
   }
 }
+
 
 

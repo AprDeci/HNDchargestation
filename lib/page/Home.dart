@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(context) {
     HomeController controller = Get.put(HomeController());
-    List tabs = Areas.arealist_name();
+    List tabs = Areas.arealist_name;
     return DefaultTabController(
         length: tabs.length,
         child: Scaffold(
@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
           )),
           body: TabBarView(
               controller: controller.tabcontroller,
-              children: Areas.areaList.map((e) {
+              children: Areas.arealist.map((e) {
                 return HomeListView(e);
               }).toList()),
         ));

@@ -35,33 +35,6 @@ class HomeListController extends GetxController{
 
   HomeListController(this.area);
 
-  // Future<void> getAllstatus() async {
-  //
-  //   allstates.clear();
-  //
-  //   hasloaded.value = false;
-  //
-  //   List<Future> futures = area.ids.entries.map((id) async {
-  //     try {
-  //       var response = await httpclient.getStationInfo({
-  //         "code": id.value,
-  //         "parentCode": null,
-  //         "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
-  //       }, headers, "lanting");
-  //       allstates[id.key] = response;
-  //     } catch (e) {
-  //       print("Getallstates-Error-${e}");
-  //     }
-  //   }).toList();
-  //
-  //   await Future.wait(futures);
-  //
-  //   hasloaded.value=true;
-  //
-  //   print("加载完毕:--------------------------${allstates.toString()}");
-  //
-  // }
-
   Future<void> getAllstatus() async {
     allstates.clear();
     hasloaded.value = false;
