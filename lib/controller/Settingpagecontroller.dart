@@ -1,3 +1,4 @@
+import 'package:aptabase_flutter/aptabase_flutter.dart';
 import 'package:chargestation/app/areas.dart';
 import 'package:chargestation/service/dbservice.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,6 +41,7 @@ class settingpagecontroller extends GetxController{
   }
 
   void updateAreaList(int oldIndex, int newIndex){
+    Aptabase.instance.trackEvent("拖拽排序");
     if (oldIndex < newIndex) newIndex-=1;
     final String item = arealist.removeAt(oldIndex);
     arealist.insert(newIndex, item);

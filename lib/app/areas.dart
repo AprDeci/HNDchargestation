@@ -1,4 +1,3 @@
-import 'package:chargestation/app/utils/dbutil.dart';
 import 'package:chargestation/controller/Settingpagecontroller.dart';
 import 'package:hive/hive.dart';
 part 'areas.g.dart';
@@ -50,19 +49,6 @@ class Area {
   Map ids;
 
   Area({required this.MM, required this.name, this.ids = const {}});
-
-  factory Area.fromJson(Map<String, dynamic> json) => Area(
-      MM: '${json['MM']}', name: '${json['name']}', ids: json['ids']
-  );
-
-  Map<String,dynamic> toJson(){
-    return {
-      'MM': MM,
-      'name': name,
-      'ids': ids,
-    };
-  }
-
 
 
 }

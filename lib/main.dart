@@ -1,4 +1,5 @@
 
+import 'package:aptabase_flutter/aptabase_flutter.dart';
 import 'package:chargestation/controller/Settingpagecontroller.dart';
 import 'package:chargestation/navigatorpage.dart';
 import 'package:chargestation/page/Home.dart';
@@ -24,6 +25,9 @@ void main() async{
 
   await Get.put(dbservice()).init();
   Get.put(settingpagecontroller());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Aptabase.init("A-US-4114330648"); // 👈 this is where you enter your App Key
 
   runApp(GetMaterialApp(
       home: navigatorpage(),

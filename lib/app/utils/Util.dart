@@ -9,6 +9,8 @@ class Util{
   static final Uri url_blog = Uri.parse('https://www.aprdec.top');
   static final Uri url_github = Uri.parse('https://github.com/aprdeci');
   static final Uri url_responsity = Uri.parse('https://github.com/AprDeci/HNDchargestation');
+  static final Uri url_lanzou = Uri.parse('https://wwqw.lanzouu.com/b007t784sf');
+  static final Uri url_github_release = Uri.parse('https://github.com/AprDeci/HNDchargestation/releases');
 
   static Future<void> LlaunchUrl(url) async {
     if (!await launchUrl(url)) {

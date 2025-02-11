@@ -1,3 +1,5 @@
+import 'package:aptabase_flutter/aptabase_flutter.dart';
+import 'package:chargestation/app/utils/Util.dart';
 import 'package:chargestation/controller/Settingpagecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -58,6 +60,7 @@ class SettingsPage extends StatelessWidget {
             title: Text('项目地址'),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: (){
+              Aptabase.instance.trackEvent("github");
               _launchUrl(url_github);
             },
           ),
@@ -65,6 +68,7 @@ class SettingsPage extends StatelessWidget {
             leading: Icon(SimpleIcons.wordpress,color: SimpleIconColors.github),
             title: Text('学长博客'),
             onTap: () {
+              Aptabase.instance.trackEvent("blog");
               _launchUrl(url_blog);
             },
             trailing: Icon(Icons.keyboard_arrow_right),
@@ -73,7 +77,8 @@ class SettingsPage extends StatelessWidget {
             leading: Icon(Icons.accessibility_new_rounded),
             title: Text('感谢名单'),
             onTap: () {
-             Get.dialog(
+              Aptabase.instance.trackEvent("感谢名单");
+              Get.dialog(
                AlertDialog(
                  title: Text('感谢名单'),
                  content: Text('谢谢软件21-3班李继鹏和我一起扫码记录ID'),
@@ -94,16 +99,21 @@ class SettingsPage extends StatelessWidget {
             title: Text('下载地址'),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () {
+              Aptabase.instance.trackEvent("下载地址");
               Get.dialog(
                 AlertDialog(
                   content: Text("下载地址"),
                   actions: [
                     TextButton(
-                      child: Text("云盘"),
-                      onPressed: () {}
+                      child: Text("云盘(密码aapr)"),
+                      onPressed: () {
+                        Util.LlaunchUrl(Util.url_lanzou);
+                      }
                     ),
                     TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Util.LlaunchUrl(Util.url_github_release);
+                        },
                         child: Text("Github_release"))
                   ]
                 )

@@ -40,12 +40,14 @@ dependencies:
   hive_flutter: 1.1.0 #持久化存储
   path_provider: ^2.1.0
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_localizations:
     sdk: flutter
   intl: any
+  aptabase_flutter: ^0.4.1
 
 dev_dependencies:
   flutter_test:
