@@ -61,7 +61,7 @@ class SettingsPage extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: (){
               Aptabase.instance.trackEvent("github");
-              _launchUrl(url_github);
+              _launchUrl(Util.url_responsity);
             },
           ),
           ListTile(
