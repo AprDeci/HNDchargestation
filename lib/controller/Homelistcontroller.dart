@@ -56,12 +56,12 @@ class HomeListController extends GetxController{
             "parentCode": null,
             "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
           }, headers).timeout(Duration(seconds: 5));
-
           allstates[idKey] = response;
           success = true;
         } catch (e) {
           if (attempt == maxRetries) {
             print("⚠️ 关键错误: ID $idKey 最终失败 - ${e.toString()}");
+            allstates[idKey] = {"error": "请求超时"};
             // 可以在这里记录最终失败状态
           } else {
             var backoffTime = (pow(2, attempt) * 1000 + random.nextInt(500)).toInt();

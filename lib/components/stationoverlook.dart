@@ -1,4 +1,5 @@
- import 'package:chargestation/controller/Homecontroller.dart';
+import 'package:chargestation/controller/Homecontroller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,11 +7,14 @@ class stationcard extends StatelessWidget {
   final Map state;
   final String name;
   final HomeController mycontroller = Get.find();
+  
   stationcard(this.state,this.name);
 
 
   @override
   Widget build(BuildContext context) {
+    print(state);
+    if(!mapEquals(state, {"error": "请求超时"})){
     return Card(
         child: Padding(
             padding: EdgeInsets.all(10),
@@ -39,8 +43,23 @@ class stationcard extends StatelessWidget {
                       border: Border.all(color: Colors.black, width: 0.5),
                     ),
                   );
-                }),
+                }
+                ),
               ),
-            ])));
+            ])));}else{
+      return Card(child: Padding(padding: EdgeInsets.all(10),child:Column(
+        children: [
+          Row(
+            children: [
+                Text("${name}"),
+                Spacer(),
+            ]
+          ),
+          Row(children: [
+            Text("${state["error"]}"),
+          ])
+        ],
+      ) ,));
+    };
   }
 }

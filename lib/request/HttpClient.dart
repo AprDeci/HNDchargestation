@@ -1,4 +1,6 @@
+import 'package:chargestation/request/AppException.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 
 class Httpclient {
@@ -24,8 +26,7 @@ class Httpclient {
       onError: _onError,
     ));
   }
-  void _onResponse(
-      Response response, ResponseInterceptorHandler handler) async {
+  void _onResponse(Response response, ResponseInterceptorHandler handler) async {
     // 请求成功是对数据做基本处理
     if (response.statusCode == 200) {
       // 处理成功的响应
@@ -39,7 +40,9 @@ class Httpclient {
 
   /// 错误处理: 网络错误等
   void _onError(DioException error, ErrorInterceptorHandler handler) {
-    handler.next(error);
+    AppException appException = AppException.create(error);
+    debugPrint("DIOerror: $appException");
+    return handler.next(error);
   }
 
 
@@ -57,7 +60,7 @@ class Httpclient {
           return "lose";
         }
     }catch(e){
-      print("异常:${e}");
+      print("getstaitioninfo异常:${e}");
     }
   }
 

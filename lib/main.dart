@@ -11,14 +11,12 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'app/areas.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
-  final dir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter();
 
   Hive.registerAdapter(AreaAdapter());
@@ -27,7 +25,7 @@ void main() async{
   Get.put(settingpagecontroller());
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Aptabase.init("A-US-4114330648"); // 👈 this is where you enter your App Key
+  await Aptabase.init("A-US-4114330648");
 
   runApp(GetMaterialApp(
       home: navigatorpage(),
