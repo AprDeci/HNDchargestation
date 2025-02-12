@@ -55,7 +55,7 @@ class HomeListView extends StatelessWidget{
               itemCount: controller.allstates.length,
               itemBuilder: (context, index) {
                 final state = controller.allstates[index + 1];
-                return stationcard(state!, "兰亭苑${index + 1}号桩");
+                return stationcard(state!, "${area.name}${index + 1}号桩");
               },
             ));
       }

@@ -60,7 +60,7 @@ class settingpagecontroller extends GetxController{
         Text("学弟学妹们有能力给学长点个star吧,这对学长真的很重要🥺",style: TextStyle(fontSize: 14),),
         ))),
         actions: [
-        TextButton(onPressed: ()=>Util.LlaunchUrl(Util.url_responsity), child: Text("好的")),
+        TextButton(onPressed: (){Util.LlaunchUrl(Util.url_responsity);Get.back();}, child: Text("好的")),
         TextButton(onPressed: ()=>Get.back(), child: Text("不给"))
         ]));
       });

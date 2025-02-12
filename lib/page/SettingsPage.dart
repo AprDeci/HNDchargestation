@@ -129,8 +129,11 @@ class SettingsPage extends StatelessWidget {
             padding: EdgeInsets.all(12),
             child: Text('区域排序(长按拖动排序,重启后生效)',style: Get.textTheme.titleSmall,),
           ),
-          ConstrainedBox(constraints: BoxConstraints(maxHeight: 60.0*Areas.arealist.length),child:
-
+          ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: 60.0*Areas.arealist.length
+              ),
+              child:
           Card.filled(color: Colors.white54.withOpacity(.7),
               shadowColor: Colors.black.withOpacity(1),
               child:Obx(()=>

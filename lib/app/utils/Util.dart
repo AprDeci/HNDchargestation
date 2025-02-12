@@ -31,4 +31,8 @@ class Util{
               TextButton(onPressed: ()=>Get.back(), child: Text("不给"))
             ]));
   }
+
+  static Future checkUpdate(BuildContext context) async {
+    
+  }
 }

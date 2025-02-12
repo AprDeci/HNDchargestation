@@ -27,6 +27,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Aptabase.init("A-US-4114330648");
 
+  Aptabase.instance.trackEvent("启动应用");
+
   runApp(GetMaterialApp(
       home: navigatorpage(),
       defaultTransition: Transition.fade,
