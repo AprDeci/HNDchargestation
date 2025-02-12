@@ -49,6 +49,6 @@ jobs:
         if: ${{ github.event_name != 'push' && inputs.build_android && !inputs.dry_run }}
         uses: actions/upload-artifact@v4
         with:
-          name: tsdm_client-apk-arm64_v8a
+          name: HNDcharge-arm64_v8a
           path: |
-            build/app/outputs/flutter-apk/tsdm_client-arm64_v8a.apk
+            build/app/outputs/flutter-apk/HNDcharge-arm64_v8a.apk
