@@ -26,6 +26,8 @@ jobs:
   build_android:
     name: build_android
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
