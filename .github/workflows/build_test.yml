@@ -13,26 +13,9 @@ on:
         type: boolean
         default: true
 jobs:
-  release:
-    name: Create release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Extract release notes
-        id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELASE_TOKEN }}
-      - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          body: '${{ steps.extract-release-notes.outputs.release_notes }}'
   build_android:
     name: build_android
+    if: ${{ github.event_name == 'push' || inputs.build_android }}
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
