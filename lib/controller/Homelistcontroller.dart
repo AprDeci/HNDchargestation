@@ -40,9 +40,11 @@ class HomeListController extends GetxController{
     hasloaded.value = false;
 
     final random = Random();
-    const maxRetries = 3;
+    int maxRetries = 2;
+    int concurrentLimit = area.ids.length; // 新增并发控制参数
 
-    List<Future<void>> futures = area.ids.entries.map((entry) async {
+    // 将请求任务包装为可执行函数列表
+    final tasks = area.ids.entries.map((entry) => () async {
       final idKey = entry.key;
       final idValue = entry.value;
       int attempt = 0;
@@ -55,24 +57,34 @@ class HomeListController extends GetxController{
             "code": idValue,
             "parentCode": null,
             "timestamp": (DateTime.now().toUtc().millisecondsSinceEpoch ~/ 1000).toString()
-          }, headers).timeout(Duration(seconds: 5));
+          }, headers);
           allstates[idKey] = response;
           success = true;
         } catch (e) {
           if (attempt == maxRetries) {
             print("⚠️ 关键错误: ID $idKey 最终失败 - ${e.toString()}");
             allstates[idKey] = {"error": "请求超时"};
-            // 可以在这里记录最终失败状态
           } else {
-            var backoffTime = (pow(2, attempt) * 1000 + random.nextInt(500)).toInt();
+            final backoffTime = (pow(2, attempt) * 1000 + random.nextInt(500)).toInt();
             await Future.delayed(Duration(milliseconds: backoffTime));
           }
         }
       }
     }).toList();
 
-    // 使用等待所有请求完成（无论成功失败）
-    await Future.wait(futures);
+    // 分批次执行
+    for (var i = 0; i < tasks.length; i += concurrentLimit) {
+      final batch = tasks.sublist(
+          i,
+          i + concurrentLimit > tasks.length ? tasks.length : i + concurrentLimit
+      );
+
+      // 等待当前批次全部完成
+      await Future.wait([
+        for (final task in batch)
+          task().catchError((e) => print("批处理错误: $e"))
+      ]);
+    }
 
     hasloaded.value = true;
     print("✅ 加载完成，成功获取 ${allstates.length}/${area.ids.length} 个状态");

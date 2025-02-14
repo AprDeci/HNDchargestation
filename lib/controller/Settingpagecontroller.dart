@@ -14,6 +14,7 @@ class settingpagecontroller extends GetxController{
   void onInit() {
     Future.delayed(Duration.zero,checkfirstuse);
     initAreas();
+    Util.checkUpdate(false);
     super.onInit();
   }
 
@@ -67,4 +68,5 @@ class settingpagecontroller extends GetxController{
 
     }
   }
+
 }

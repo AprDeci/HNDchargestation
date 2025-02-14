@@ -93,6 +93,14 @@ class SettingsPage extends StatelessWidget {
             },
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
+          ListTile(
+            leading: Icon(Icons.upcoming),
+            title: Text('检查更新'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+            onTap: (){
+              Util.checkUpdate(true);
+            },
+          ),
           // 下载页面
           ListTile(
             leading: Icon(Icons.download_rounded),

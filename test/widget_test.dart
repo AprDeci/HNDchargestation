@@ -6,6 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:chargestation/app/areas.dart';
+import 'package:chargestation/app/utils/Util.dart';
 import 'package:chargestation/controller/Settingpagecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,5 +23,14 @@ void main() {
   test('areamap',(){
     print(Areas.areaMap.keys.toList());
     print(settingpagecontroller.instance.arealist);
+  });
+
+  test('checkupdate',() async {
+    await Util.checkUpdate(false);
+  });
+
+  test('parseversion', (){
+    var con = Util.parse_version('1.2.3');
+    print(con);
   });
 }

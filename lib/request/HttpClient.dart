@@ -2,9 +2,7 @@ import 'package:chargestation/request/AppException.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class Httpclient {
-
   static Httpclient? _instance;
 
   factory Httpclient() => _instance ??= Httpclient._internal();
@@ -13,7 +11,7 @@ class Httpclient {
 
   static Dio _dio = Dio();
 
-  Httpclient._internal(){
+  Httpclient._internal() {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: 'https://wx.isfdz.com/api/',
       connectTimeout: Duration(seconds: 5),
@@ -26,7 +24,9 @@ class Httpclient {
       onError: _onError,
     ));
   }
-  void _onResponse(Response response, ResponseInterceptorHandler handler) async {
+
+  void _onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     // 请求成功是对数据做基本处理
     if (response.statusCode == 200) {
       // 处理成功的响应
@@ -45,26 +45,36 @@ class Httpclient {
     return handler.next(error);
   }
 
-
-
-  getStationInfo(Map data, Map<String,String> headers) async{
+  getStationInfo(Map data, Map<String, String> headers) async {
     try {
-        Response response = await _dio.post(
-            '/equi/afterProtocol/getLineInfo',
-            data: data,
-            options: Options(
-                headers: headers, followRedirects: false));
-        if (response.statusCode == 200) {
-          return response.data;
-        } else {
-          return "lose";
-        }
-    }catch(e){
+      Response response = await _dio.post('/equi/afterProtocol/getLineInfo',
+          data: data,
+          options: Options(headers: headers, followRedirects: false));
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        return "lose";
+      }
+    } catch (e) {
       print("getstaitioninfo异常:${e}");
     }
   }
 
+  get(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      Response response = await _dio.get(url, queryParameters: queryParameters);
+      if (response.statusCode == 200) {
+        print("return data");
+        return response;
+      } else {
+        return "lose";
+      }
+    } catch (e) {
+      print("get异常:${e}");
+    }
+  }
 }
-
-
-
