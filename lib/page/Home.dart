@@ -17,6 +17,9 @@ class Home extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
               title: TabBar(
+                // isScrollable: true,
+                // indicatorSize: TabBarIndicatorSize.label,
+                // tabAlignment: TabAlignment.center,
             controller: controller.tabcontroller,
             tabs: tabs
                 .map((e) => Tab(

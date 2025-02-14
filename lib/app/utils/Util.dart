@@ -1,4 +1,3 @@
-import 'package:chargestation/request/HttpClient.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Util{
-  static const version = 'v1.2.0';
+  static const version = 'v1.2.1';
 
   static final Uri url_blog = Uri.parse('https://www.aprdec.top');
   static final Uri url_github = Uri.parse('https://github.com/aprdeci');
@@ -44,6 +43,8 @@ class Util{
     try {
       var response = await dio.get(url);
       if(response.statusCode==200){
+        print(parse_version(response.data['tag_name']));
+        print(parse_version(version));
       if (parse_version(response.data['tag_name']) > parse_version(version)) {
        await Get.dialog(
           AlertDialog(
@@ -57,8 +58,8 @@ class Util{
                       child: Text("${response.data['body']}"),
                     ))),
             actions: [
-              TextButton(onPressed: ()=>Util.LlaunchUrl(Util.url_github_release), child: Text("Github")),
-              TextButton(onPressed: ()=>Util.LlaunchUrl(Util.url_lanzou), child: Text("蓝奏云")),
+              TextButton(onPressed: (){Util.LlaunchUrl(Util.url_github_release);Get.back();}, child: Text("Github")),
+              TextButton(onPressed: (){Util.LlaunchUrl(Util.url_lanzou);Get.back();}, child: Text("蓝奏云(密码:aapr)")),
               TextButton(onPressed: ()=>Get.back(), child: Text("取消"))
             ],
           )

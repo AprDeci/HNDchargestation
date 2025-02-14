@@ -60,7 +60,7 @@ class stationcard extends StatelessWidget {
             margin: const EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
               image: const DecorationImage(
-                image: AssetImage('assets/Bawunai.gif'), // 替换你的图片路径
+                image: AssetImage('assets/load_error.webp'), // 替换你的图片路径
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(4),

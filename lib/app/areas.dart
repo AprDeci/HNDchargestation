@@ -23,6 +23,7 @@ class Areas {
     ),
     "shitang": Area(MM: 'shitang', name: '食堂'),
     "XX": Area(MM: 'XX', name: 'XX'),
+    "test":Area(MM: 'test', name: 'dsalk')
   };
 
   static List<Area> get arealist {
