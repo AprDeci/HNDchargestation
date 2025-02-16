@@ -21,9 +21,14 @@ class Areas {
         12: "4GR00007994"
       },
     ),
-    "shitang": Area(MM: 'shitang', name: '食堂'),
-    "XX": Area(MM: 'XX', name: 'XX'),
-    "test":Area(MM: 'test', name: 'dsalk')
+    "shitang": Area(MM: 'shitang', name: '食堂',ids: {
+      1:"4GR00009820",
+      2:"4GR00009377",
+      3:"4GR00009460",
+      4:"4GR00009456",
+      5:"4GR00009381",
+      6:"4GR00009366"
+    }),
   };
 
   static List<Area> get arealist {

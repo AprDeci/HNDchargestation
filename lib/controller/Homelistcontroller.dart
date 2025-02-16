@@ -87,6 +87,7 @@ class HomeListController extends GetxController{
     }
 
     hasloaded.value = true;
+    print(allstates.keys);
     print("✅ 加载完成，成功获取 ${allstates.length}/${area.ids.length} 个状态");
   }
 

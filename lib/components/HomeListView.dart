@@ -19,6 +19,8 @@ class HomeListView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemSize = (screenWidth - 20 * 2 - 5 * 18) / 10;
 
     return KeepAliveWrapper(child: Obx(() {
       if (!controller.hasloaded.value) {
@@ -39,8 +41,8 @@ class HomeListView extends StatelessWidget{
                             children: List.generate(10, (index) {
                               return Container(
                                 margin: EdgeInsets.all(4),
-                                width: 25,
-                                height: 25,
+                                width: itemSize,
+                                height: itemSize,
                                 color: Colors.grey,
                               );
                             }),

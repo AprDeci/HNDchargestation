@@ -44,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 applicationName: "河农大充电桩查看器",
                 applicationVersion: "赶快去看《败犬女主太多了!》",
-                applicationLegalese: "Ver 1.1",
+                applicationLegalese: Util.version,
               ));
 
 
@@ -93,14 +93,6 @@ class SettingsPage extends StatelessWidget {
             },
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
-          ListTile(
-            leading: Icon(Icons.upcoming),
-            title: Text('检查更新'),
-            trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: (){
-              Util.checkUpdate(true);
-            },
-          ),
           // 下载页面
           ListTile(
             leading: Icon(Icons.download_rounded),
@@ -127,6 +119,14 @@ class SettingsPage extends StatelessWidget {
                 )
               );
     }
+          ),
+          ListTile(
+            leading: Icon(Icons.upcoming),
+            title: Text('检查更新'),
+            trailing: Text('${Util.version}'),
+            onTap: (){
+              Util.checkUpdate(true);
+            },
           ),
           Divider(
             indent: 12,
