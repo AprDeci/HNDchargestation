@@ -7,6 +7,11 @@ on:
         required: true
         type: boolean
         default: true
+      build_ios:
+        description: Build iOS platform artifacts.
+        required: true
+        type: boolean
+        default: true
       dry_run:
         description: Dry run, do NOT upload artifacts.
         required: true
@@ -52,3 +57,36 @@ jobs:
           name: HNDcharge-arm64_v8a
           path: |
             build/app/outputs/flutter-apk/HNDcharge-arm64_v8a.apk
+
+  build-macos-and-ios:
+    name: Build MacOS and iOS
+    if: ${{ github.event_name == 'push'|| inputs.build_ios }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.CI_FLUTTER_VERSION}}
+          cache: true
+      - name: Precompile
+        run: |
+          git submodule update --init --recursive --force
+          flutter pub get
+      - name: Build iOS ipa
+        if: ${{ github.event_name == 'push' || inputs.build_ios }}
+        run: |
+          flutter build ios --release --no-codesign
+      - name: Packing
+        if: ${{ github.event_name == 'push' || inputs.build_ios }}
+        run: |
+          mkdir Payload
+          mv build/ios/iphoneos/Runner.app Payload
+          zip -r9 HNDcharge.ipa Payload
+      - name: Upload iOS artifacts
+        if: ${{ github.event_name != 'push' && inputs.build_ios && !inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: HNDcharge-ios-tarball
+          path: HNDcharge.ipa
