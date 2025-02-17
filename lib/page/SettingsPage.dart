@@ -64,35 +64,6 @@ class SettingsPage extends StatelessWidget {
               _launchUrl(Util.url_responsity);
             },
           ),
-          ListTile(
-            leading: Icon(SimpleIcons.wordpress,color: SimpleIconColors.github),
-            title: Text('学长博客'),
-            onTap: () {
-              Aptabase.instance.trackEvent("blog");
-              _launchUrl(url_blog);
-            },
-            trailing: Icon(Icons.keyboard_arrow_right),
-          ),
-          ListTile(
-            leading: Icon(Icons.accessibility_new_rounded),
-            title: Text('感谢名单'),
-            onTap: () {
-              Aptabase.instance.trackEvent("感谢名单");
-              Get.dialog(
-               AlertDialog(
-                 title: Text('感谢名单'),
-                 content: Text('谢谢软件21-3班李继鹏和我一起扫码记录ID'),
-                 actions: [
-                   TextButton(
-                     onPressed: (() => Get.back(result: true)),
-                     child: Text("确定"),
-                   ),
-                 ],
-               )
-             );
-            },
-            trailing: Icon(Icons.keyboard_arrow_right),
-          ),
           // 下载页面
           ListTile(
             leading: Icon(Icons.download_rounded),

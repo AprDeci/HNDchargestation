@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Util{
-  static const version = 'v1.2.1';
+  static const version = 'v1.2.2';
 
   static final Uri url_blog = Uri.parse('https://www.aprdec.top');
   static final Uri url_github = Uri.parse('https://github.com/aprdeci');
