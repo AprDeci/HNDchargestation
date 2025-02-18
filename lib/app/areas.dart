@@ -4,24 +4,24 @@ part 'areas.g.dart';
 class Areas {
   static final Map<String, Area> areaMap = {
     "lanting": Area(
-      MM: 'lanting',
+      MM: '',
       name: '兰亭',
       ids: {
         1: "4GR00007971",
         2: "4GR00008013",
         3: "4GR00007975",
         4: "4GR00007977",
-        5: "4GR00008014",
-        6: "4GR00007974",
-        7: "4GR00007996",
-        8: "4GR00007992",
-        9: "4GR00008016",
-        10: "4GR00007973",
-        11: "4GR00007978",
-        12: "4GR00007994"
+        5: "4GR00007978",
+        6: "4GR00008016",
+        7: "4GR00007974",
+        8: "4GR00007996",
+        9: "4GR00008014",
+        10: "4GR00007994",
+        11: "4GR00007992",
+        12: "4GR00007973"
       },
     ),
-    "shitang": Area(MM: 'shitang', name: '食堂',ids: {
+    "shitang": Area(MM: '(东南角顺时针)', name: '二食堂',ids: {
       1:"4GR00009820",
       2:"4GR00009377",
       3:"4GR00009460",
@@ -29,6 +29,10 @@ class Areas {
       5:"4GR00009381",
       6:"4GR00009366"
     }),
+    "xingzhenglou": Area(MM: '(从左向右)', name: '行政楼',ids: {
+      1:"4GR00009364",
+      2:"4GR00009822",
+  })
   };
 
   static List<Area> get arealist {

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:chargestation/main.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
   test('返回areaslist_name', (){
@@ -32,5 +33,11 @@ void main() {
   test('parseversion', (){
     var con = Util.parse_version('1.2.3');
     print(con);
+  });
+
+  test('version',() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo.version);
   });
 }

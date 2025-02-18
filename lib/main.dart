@@ -11,8 +11,10 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'app/areas.dart';
+import 'app/utils/Util.dart';
 
 void main() async{
 
@@ -28,6 +30,8 @@ void main() async{
   await Aptabase.init("A-US-4114330648");
 
   Aptabase.instance.trackEvent("启动应用");
+
+  Util.packageInfo = await PackageInfo.fromPlatform();
 
   runApp(GetMaterialApp(
       home: navigatorpage(),

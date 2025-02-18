@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Util{
-  static const version = 'v1.2.2';
+  static const version = 'v1.2.3';
+  static late PackageInfo packageInfo;
 
   static final Uri url_blog = Uri.parse('https://www.aprdec.top');
   static final Uri url_github = Uri.parse('https://github.com/aprdeci');
@@ -37,6 +39,7 @@ class Util{
   }
 
   static Future checkUpdate(bool istap) async {
+    String version = packageInfo.version;
     if (istap) SmartDialog.showToast("检查更新ing",maskColor:Colors.white.withOpacity(0.5));
     Dio dio = Dio();
     var url = 'https://api.github.com/repos/AprDeci/HNDchargestation/releases/latest';
@@ -69,7 +72,7 @@ class Util{
       }
       }
       }catch(e) {
-        if (istap)SmartDialog.showToast("检查更新失败");
+        SmartDialog.showToast("检查更新失败");
       }
     }
 

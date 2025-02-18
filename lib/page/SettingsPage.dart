@@ -44,7 +44,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 applicationName: "河农大充电桩查看器",
                 applicationVersion: "赶快去看《败犬女主太多了!》",
-                applicationLegalese: Util.version,
+                applicationLegalese: 'Ver.${Util.packageInfo.version}',
               ));
 
 
@@ -94,7 +94,7 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.upcoming),
             title: Text('检查更新'),
-            trailing: Text('${Util.version}'),
+            trailing: Text('Ver.${Util.packageInfo.version}'),
             onTap: (){
               Util.checkUpdate(true);
             },
@@ -120,12 +120,17 @@ class SettingsPage extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
             onReorder: controller.updateAreaList,
             children: Areas.arealist.map((e) => ListTile(
-                title: Text(e.name,style: TextStyle(fontSize: 14),),
+                title: Text(e.name+e.MM,style: TextStyle(fontSize: 14),),
                 trailing: Icon(Icons.drag_handle,color: Colors.grey,),
                 key: Key(e.name),
             )).toList()
           ))
-          ))
+          )),
+          Divider(
+            indent: 12,
+            endIndent: 12,
+            color: Colors.grey.withOpacity(.1),
+          ),
         ],
       ),
     );
